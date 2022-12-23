@@ -1,0 +1,18 @@
+<h4>Nome: {{nome ?? 'Indefinido'}}</h4>
+
+<mat-form-field class="w-100" appearance="legacy">
+  <mat-label>CNPJ</mat-label>
+  <input matInput placeholder="CNPJ" cdkFocusInitial [(ngModel)]="novaLicenca.cnpj" (input)="buscarPessoa(novaLicenca.cnpj)">
+</mat-form-field>
+
+<mat-form-field class="w-100" appearance="legacy">
+  <mat-label>Vencimento</mat-label>
+  <input matInput [matDatepicker]="picker" [(ngModel)]="novaLicenca.validade" readonly>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button cdkFocusInitial [mat-dialog-close]="novaLicenca">Confirmar</button> <!-- [disabled]="!nome" -->
+</div>

@@ -1,0 +1,14 @@
+<p>Cliente: {{licencaRecebida.nomeCliente}}</p>
+<p>CNPJ: {{licencaRecebida.cnpj}}</p>
+
+<mat-form-field class="w-100" appearance="fill">
+  <mat-label>Vencimento</mat-label>
+  <input matInput [matDatepicker]="picker" [(ngModel)]="licencaRecebida.validade" readonly>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button cdkFocusInitial [mat-dialog-close]="licencaRecebida">Confirmar</button>
+</div>

@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  glUser: 'gluser',
+  glToken: 'gltoken',
+  glDadosSessao: 'dadosSessao',
+  endpoint_api: 'http://192.168.0.101:5151/api',
+  toastrConfig: {
+    closeButton: true,
+    progressBar: true,
+    timeOut: 3000
+  },
+  databaseName: 'gerenciador_hom'
 };
 
 /*

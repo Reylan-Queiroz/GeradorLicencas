@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <div class="row">
+        <div class="col-4">
+          <mat-form-field class="w-100" appearance="standard">
+            <mat-label>Filtrar</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="CNPJ, Cliente..." #input>
+          </mat-form-field>
+        </div>
+
+        <div class="col"></div>
+
+        <div class="col-auto my-auto">
+          <button mat-raised-button (click)="modalAdicionarLicenca()" style="margin-right: 20px;">Incluir Licença</button>
+
+          <button mat-raised-button (click)="fileImportInput.click()">Importar CSV</button>
+          <input type="file" class="d-none" accept="text/csv" #fileImportInput (change)="fileChangeListener($event)" />
+        </div>
+      </div>
+
+      <div class="w-100 mat-elevation-z8 mt-3">
+        <table mat-table class="w-100" [dataSource]="dataSource" matSort #table>
+          <ng-container matColumnDef="cliente">
+            <th mat-header-cell *matHeaderCellDef> Cliente </th>
+            <td mat-cell *matCellDef="let row"> {{row.nomeCliente}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cnpj">
+            <th mat-header-cell *matHeaderCellDef> CNPJ </th>
+            <td mat-cell *matCellDef="let row"> {{row.cnpj}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="validade">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Validade </th>
+            <td mat-cell *matCellDef="let row"> {{row.validade | date: 'dd/MM/yyyy'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="areaEditar">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button (click)="modalEditarLicenca(row)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="areaAtualizar">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button (click)="atualizarValidade(row)">
+                <mat-icon class="text-success">check</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="areaBloquear">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button (click)="atualizarValidade(row, true)">
+                <mat-icon style="color: rgb(219, 103, 103);">lock</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Nenhum dado correspondente ao filtro "{{input.value}}"</td>
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="fixed-bottom">
+  <div class="container-flex">
+    <hr>
+    <div class="row">
+      <div class="col-12 ms-3">
+        <p class="fw-bold">A aplicação depende do servidor da Embratel e o app VirtualStore.Api </p>
+      </div>
+    </div>
+  </div>
+</footer>

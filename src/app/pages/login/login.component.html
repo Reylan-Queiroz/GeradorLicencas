@@ -1,0 +1,23 @@
+<form class="container-main" [formGroup]="form" (ngSubmit)="onSubmit(form)">
+  <div class="d-flex align-items-center box">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 mat-dialog-title>Autentique-se:</h2>
+
+          <mat-form-field class="w-100">
+            <input matInput placeholder="Login" formControlName="login" cdkFocusInitial>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input matInput placeholder="Senha" formControlName="password" [type]="hide ? 'password' : 'text'">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <button type="submit" mat-raised-button class="float-end" [disabled]="form.invalid">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
